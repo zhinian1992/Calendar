@@ -15,6 +15,7 @@ public:
     explicit DateCell(int iNO,QWidget *parent = 0);
     ~DateCell();
     void setCellText(QDate qDate,QString qsTask = "");
+    void setCellStyle(bool bCurrentDay,bool bCurrentMonth);
 private:
     Ui::DateCell *ui;
     int m_CellNO;

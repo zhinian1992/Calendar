@@ -3,6 +3,11 @@
 
 #include <QDate>
 
+#define CURRENTDAYSTYLE "QWidget{background-color: rgb(204,255,204);}"
+#define CURRENTMONTHSTYLE "QWidget{background-color: rgb(255,255,255);}"
+#define OTHERMONTHDAYSTYLE "QWidget{background-color: rgb(242,242,242);}"
+
+
 #define CELLWIDTH 100
 #define CELLHEIGHT 60
 
@@ -28,4 +33,17 @@ void DateCell::setCellText(QDate qDate, QString qsTask)
     QString qsDay = qDate.toString("dd");
     ui->dateLabel->setText(qsDay);
     ui->taskLabel->setText(qsTask);
+}
+
+void DateCell::setCellStyle(bool bCurrentDay, bool bCurrentMonth)
+{
+    if(bCurrentDay)
+        this->setStyleSheet(CURRENTDAYSTYLE);
+    else
+    {
+        if(bCurrentMonth)
+            this->setStyleSheet(CURRENTMONTHSTYLE);
+        else
+            this->setStyleSheet(OTHERMONTHDAYSTYLE);
+    }
 }

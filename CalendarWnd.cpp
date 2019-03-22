@@ -54,10 +54,22 @@ void CalendarWnd::updateCellText()
     int iDayInWeek_firstDayInMonth = date.dayOfWeek();
     QDate first_cell_date = date.addDays(- iDayInWeek_firstDayInMonth);
 
-    std::vector<DateCell*>::iterator iter;
-    for(iter = m_CellList.begin();iter != m_CellList.end();iter++)
+    for(int i = 0;i<m_CellList.size();i++)
     {
-        (*iter)->setCellText(first_cell_date);
+        m_CellList.at(i)->setCellText(first_cell_date);
+
+        if(i<iDayInWeek_firstDayInMonth ||
+                i >= date.daysInMonth() + iDayInWeek_firstDayInMonth)
+        {
+            m_CellList.at(i)->setCellStyle(false,false);
+        }
+        else if( i == iDayInWeek_firstDayInMonth + iDayInMonth - 1)
+        {
+            m_CellList.at(i)->setCellStyle(true,true);
+        }
+        else
+            m_CellList.at(i)->setCellStyle(false,true);
+
         first_cell_date = first_cell_date.addDays(1);
     }
 }
