@@ -12,11 +12,12 @@ class DateCell : public QWidget
     Q_OBJECT
 
 public:
-    explicit DateCell(QWidget *parent = 0);
+    explicit DateCell(int iNO,QWidget *parent = 0);
     ~DateCell();
-
+    void setCellText(QDate qDate,QString qsTask = "");
 private:
     Ui::DateCell *ui;
+    int m_CellNO;
 };
 
 #endif // DATECELL_H

@@ -1,8 +1,14 @@
 #include "CalendarWnd.h"
 #include "ui_CalendarWnd.h"
+#include "DateCell.h"
+
+#include <vector>
 
 #include <QGraphicsDropShadowEffect>
 #include <QMouseEvent>
+#include <QDate>
+
+std::vector<DateCell *> m_CellList;
 
 CalendarWnd::CalendarWnd(QWidget *parent) :
     QWidget(parent),
@@ -24,11 +30,36 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    shadow->setBlurRadius(12);
    //设置窗体阴影
    ui->widget->setGraphicsEffect(shadow);
+
+   for(int i = 0; i< 42;i++)
+   {
+       DateCell *cell = new DateCell(i,ui->widget);
+       m_CellList.push_back(cell);
+   }
+
+   this->updateCellText();
 }
 
 CalendarWnd::~CalendarWnd()
 {
     delete ui;
+}
+
+void CalendarWnd::updateCellText()
+{
+    QDate date = QDate::currentDate();
+    int iDayInWeek = date.dayOfWeek();
+    int iDayInMonth = date.day();
+    date = date.addDays(1 - iDayInMonth);
+    int iDayInWeek_firstDayInMonth = date.dayOfWeek();
+    QDate first_cell_date = date.addDays(- iDayInWeek_firstDayInMonth);
+
+    std::vector<DateCell*>::iterator iter;
+    for(iter = m_CellList.begin();iter != m_CellList.end();iter++)
+    {
+        (*iter)->setCellText(first_cell_date);
+        first_cell_date = first_cell_date.addDays(1);
+    }
 }
 
 void CalendarWnd::mousePressEvent(QMouseEvent *event)
