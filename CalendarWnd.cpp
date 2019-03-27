@@ -1,12 +1,13 @@
 #include "CalendarWnd.h"
 #include "ui_CalendarWnd.h"
 #include "DateCell.h"
+#include "MyButton.h"
 
 #include <vector>
 
 #include <QGraphicsDropShadowEffect>
 #include <QMouseEvent>
-#include <QDate>
+
 
 std::vector<DateCell *> m_CellList;
 
@@ -19,7 +20,7 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    //设置无边框
    this->setWindowFlag(Qt::FramelessWindowHint);
    //设置透明
-   this->setAttribute(Qt::WA_TranslucentBackground);
+   this->setAttribute(Qt::WA_TranslucentBackground,true);
    //实例shadow
    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
    //设置阴影距离
@@ -30,13 +31,15 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    shadow->setBlurRadius(12);
    //设置窗体阴影
    ui->widget->setGraphicsEffect(shadow);
-
+   //创建日历格子
    for(int i = 0; i< 42;i++)
    {
        DateCell *cell = new DateCell(i,ui->widget);
        m_CellList.push_back(cell);
    }
+   //创建日期变换按钮行
 
+   m_CurrentDate = QDate::currentDate();
    this->updateCellText();
 }
 
@@ -47,7 +50,7 @@ CalendarWnd::~CalendarWnd()
 
 void CalendarWnd::updateCellText()
 {
-    QDate date = QDate::currentDate();
+    QDate date = m_CurrentDate;
     int iDayInWeek = date.dayOfWeek();
     int iDayInMonth = date.day();
     date = date.addDays(1 - iDayInMonth);
@@ -72,6 +75,7 @@ void CalendarWnd::updateCellText()
 
         first_cell_date = first_cell_date.addDays(1);
     }
+    ui->lineEdit_Date->setText(m_CurrentDate.toString("yyyy-MM-dd"));
 }
 
 void CalendarWnd::mousePressEvent(QMouseEvent *event)

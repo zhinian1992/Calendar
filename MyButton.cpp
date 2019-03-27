@@ -6,6 +6,8 @@ MyButton::MyButton(QWidget *parent) :
     ui(new Ui::MyButton)
 {
     ui->setupUi(this);
+    //设置样式
+    this->setAttribute(Qt::WA_StyledBackground,true);
 }
 
 MyButton::~MyButton()

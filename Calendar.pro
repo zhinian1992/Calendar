@@ -26,12 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         CalendarWnd.cpp \
-    DateCell.cpp
+    DateCell.cpp \
+    MyButton.cpp
 
 HEADERS += \
         CalendarWnd.h \
-    DateCell.h
+    DateCell.h \
+    MyButton.h
 
 FORMS += \
         CalendarWnd.ui \
-    DateCell.ui
+    DateCell.ui \
+    MyButton.ui

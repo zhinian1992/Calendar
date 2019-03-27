@@ -2,6 +2,7 @@
 #define CALENDARWND_H
 
 #include <QWidget>
+#include <QDate>
 
 namespace Ui {
 class CalendarWnd;
@@ -21,6 +22,8 @@ private:
     QPoint m_MousePressPos; //鼠标按下位置
     QPoint m_MouseMovePos;  //鼠标移动位置
     bool m_bMousePress;     //鼠标是否按下
+
+    QDate m_CurrentDate;
 protected:
     void updateCellText();
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

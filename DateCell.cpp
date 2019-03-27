@@ -3,7 +3,7 @@
 
 #include <QDate>
 
-#define CURRENTDAYSTYLE "QWidget{background-color: rgb(187,255,255);}"
+#define CURRENTDAYSTYLE "QWidget{background-color: rgb(230,253,255);}"
 #define CURRENTMONTHSTYLE "QWidget{background-color: rgb(255,255,255);}"
 #define OTHERMONTHDAYSTYLE "QWidget{background-color: rgb(238,238,209);}"
 
@@ -17,10 +17,11 @@ DateCell::DateCell(int iNO,QWidget *parent) :
     ui(new Ui::DateCell)
 {
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_StyledBackground,true);
 
     int iLineNO = m_CellNO/7;
     int iColumnNO = m_CellNO%7;
-    this->setGeometry(iColumnNO*CELLWIDTH,iLineNO*CELLHEIGHT + 110,CELLWIDTH,CELLHEIGHT);
+    this->setGeometry(iColumnNO*CELLWIDTH,iLineNO*CELLHEIGHT + 100,CELLWIDTH,CELLHEIGHT);
 }
 
 DateCell::~DateCell()
