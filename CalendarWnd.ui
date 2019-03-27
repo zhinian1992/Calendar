@@ -25,7 +25,7 @@
    <property name="styleSheet">
     <string notr="true">background-color: rgb(213, 213, 213);</string>
    </property>
-   <widget class="MyButton" name="widget_2" native="true">
+   <widget class="MyButton" name="btn_LastYear" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -69,7 +69,7 @@ background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
-   <widget class="MyButton" name="widget_3" native="true">
+   <widget class="MyButton" name="btn_LastMonth" native="true">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -111,7 +111,7 @@ background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
-   <widget class="MyButton" name="widget_4" native="true">
+   <widget class="MyButton" name="btn_NextMonth" native="true">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -124,7 +124,7 @@ background-color: rgb(255, 255, 255);</string>
      <string notr="true">border-color: rgb(0, 0, 0);
 background-color: rgb(213, 213, 213);</string>
     </property>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="label_NextMonth">
      <property name="geometry">
       <rect>
        <x>1</x>
@@ -146,14 +146,14 @@ background-color: rgb(213, 213, 213);</string>
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Next Year &gt;&gt;</string>
+      <string>Next Month &gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
-   <widget class="MyButton" name="widget_5" native="true">
+   <widget class="MyButton" name="btn_NextYear" native="true">
     <property name="geometry">
      <rect>
       <x>500</x>
@@ -188,14 +188,14 @@ background-color: rgb(213, 213, 213);</string>
 background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Next Month &gt;</string>
+      <string>Next Year &gt;&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
-   <widget class="MyButton" name="widget_6" native="true">
+   <widget class="MyButton" name="btn_Return" native="true">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -504,9 +504,9 @@ background-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1</x>
-      <y>1</y>
+      <y>0</y>
       <width>698</width>
-      <height>19</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -541,33 +541,42 @@ background-color: rgb(255, 255, 255);</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="MyButton" name="btn_Close" native="true">
      <property name="geometry">
       <rect>
-       <x>679</x>
+       <x>669</x>
        <y>0</y>
-       <width>20</width>
+       <width>30</width>
        <height>19</height>
       </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Segoe Script</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::StrongFocus</enum>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(255, 255, 255);</string>
      </property>
-     <property name="text">
-      <string>X</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>30</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe Script</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

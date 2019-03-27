@@ -15,12 +15,12 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CalendarWnd)
 {
-    ui->setupUi(this);
+   ui->setupUi(this);
 
    //设置无边框
    this->setWindowFlag(Qt::FramelessWindowHint);
    //设置透明
-   this->setAttribute(Qt::WA_TranslucentBackground,true);
+   this->setAttribute(Qt::WA_TranslucentBackground);
    //实例shadow
    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
    //设置阴影距离
@@ -41,6 +41,12 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
 
    m_CurrentDate = QDate::currentDate();
    this->updateCellText();
+
+   connect(ui->btn_Close,&MyButton::clicked,this,&QWidget::close);
+   connect(ui->btn_NextMonth,&MyButton::clicked,this,&CalendarWnd::goToNextMonth);
+   connect(ui->btn_NextYear,&MyButton::clicked,this,&CalendarWnd::goToNextYear);
+   connect(ui->btn_LastMonth,&MyButton::clicked,this,&CalendarWnd::goToLastMonth);
+   connect(ui->btn_Return,&MyButton::clicked,this,&CalendarWnd::backToToday);
 }
 
 CalendarWnd::~CalendarWnd()
@@ -76,6 +82,40 @@ void CalendarWnd::updateCellText()
         first_cell_date = first_cell_date.addDays(1);
     }
     ui->lineEdit_Date->setText(m_CurrentDate.toString("yyyy-MM-dd"));
+}
+
+void CalendarWnd::goToNextMonth()
+{
+    m_CurrentDate = m_CurrentDate.addMonths(1);
+    m_CurrentDate = m_CurrentDate.addDays(-m_CurrentDate.day() + 1);
+    updateCellText();
+}
+
+void CalendarWnd::goToNextYear()
+{
+    m_CurrentDate = m_CurrentDate.addYears(1);
+    m_CurrentDate = m_CurrentDate.addDays(-m_CurrentDate.day() + 1);
+    updateCellText();
+}
+
+void CalendarWnd::goToLastMonth()
+{
+    m_CurrentDate = m_CurrentDate.addMonths(-1);
+    m_CurrentDate = m_CurrentDate.addDays(-m_CurrentDate.day() + 1);
+    updateCellText();
+}
+
+void CalendarWnd::goToLastYear()
+{
+    m_CurrentDate = m_CurrentDate.addYears(-1);
+    m_CurrentDate = m_CurrentDate.addDays(-m_CurrentDate.day() + 1);
+    updateCellText();
+}
+
+void CalendarWnd::backToToday()
+{
+    m_CurrentDate = QDate::currentDate();
+    updateCellText();
 }
 
 void CalendarWnd::mousePressEvent(QMouseEvent *event)

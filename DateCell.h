@@ -16,9 +16,16 @@ public:
     ~DateCell();
     void setCellText(QDate qDate,QString qsTask = "");
     void setCellStyle(bool bCurrentDay,bool bCurrentMonth);
+
+private:
+    void enterEvent(QEvent *event)Q_DECL_OVERRIDE;
+    void leaveEvent(QEvent *event)Q_DECL_OVERRIDE;
+
 private:
     Ui::DateCell *ui;
     int m_CellNO;
+    bool m_IsCurrentDay;
+    bool m_IsCurrentMonth;
 };
 
 #endif // DATECELL_H
