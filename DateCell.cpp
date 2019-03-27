@@ -3,9 +3,9 @@
 
 #include <QDate>
 
-#define CURRENTDAYSTYLE "QWidget{background-color: rgb(204,255,204);}"
+#define CURRENTDAYSTYLE "QWidget{background-color: rgb(187,255,255);}"
 #define CURRENTMONTHSTYLE "QWidget{background-color: rgb(255,255,255);}"
-#define OTHERMONTHDAYSTYLE "QWidget{background-color: rgb(242,242,242);}"
+#define OTHERMONTHDAYSTYLE "QWidget{background-color: rgb(238,238,209);}"
 
 
 #define CELLWIDTH 100
