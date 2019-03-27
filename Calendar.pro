@@ -27,14 +27,17 @@ SOURCES += \
         main.cpp \
         CalendarWnd.cpp \
     DateCell.cpp \
-    MyButton.cpp
+    MyButton.cpp \
+    MyLabel.cpp
 
 HEADERS += \
         CalendarWnd.h \
     DateCell.h \
-    MyButton.h
+    MyButton.h \
+    MyLabel.h
 
 FORMS += \
         CalendarWnd.ui \
     DateCell.ui \
-    MyButton.ui
+    MyButton.ui \
+    MyLabel.ui

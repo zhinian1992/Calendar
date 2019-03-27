@@ -6,7 +6,6 @@
 #include <vector>
 
 #include <QGraphicsDropShadowEffect>
-#include <QMouseEvent>
 
 
 std::vector<DateCell *> m_CellList;
@@ -43,10 +42,11 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    this->updateCellText();
 
    connect(ui->btn_Close,&MyButton::clicked,this,&QWidget::close);
-   connect(ui->btn_NextMonth,&MyButton::clicked,this,&CalendarWnd::goToNextMonth);
-   connect(ui->btn_NextYear,&MyButton::clicked,this,&CalendarWnd::goToNextYear);
-   connect(ui->btn_LastMonth,&MyButton::clicked,this,&CalendarWnd::goToLastMonth);
-   connect(ui->btn_Return,&MyButton::clicked,this,&CalendarWnd::backToToday);
+   connect(ui->label_NextMonth,&MyLabel::clicked,this,&CalendarWnd::goToNextMonth);
+   connect(ui->label_NextYear,&MyLabel::clicked,this,&CalendarWnd::goToNextYear);
+   connect(ui->label_LastMonth,&MyLabel::clicked,this,&CalendarWnd::goToLastMonth);
+   connect(ui->label_LastYear,&MyLabel::clicked,this,&CalendarWnd::goToLastYear);
+   connect(ui->label_Return,&MyLabel::clicked,this,&CalendarWnd::backToToday);
 }
 
 CalendarWnd::~CalendarWnd()
@@ -116,28 +116,4 @@ void CalendarWnd::backToToday()
 {
     m_CurrentDate = QDate::currentDate();
     updateCellText();
-}
-
-void CalendarWnd::mousePressEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        m_bMousePress = true;
-        m_MousePressPos = event->globalPos();
-    }
-}
-
-void CalendarWnd::mouseReleaseEvent(QMouseEvent *event)
-{
-    m_bMousePress = false;
-}
-
-void CalendarWnd::mouseMoveEvent(QMouseEvent *event)
-{
-    if(m_bMousePress)
-    {
-        m_MouseMovePos = event->globalPos();
-        this->move(this->pos() + m_MouseMovePos - m_MousePressPos);
-        m_MousePressPos = m_MouseMovePos;
-    }
 }
