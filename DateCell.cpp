@@ -2,6 +2,7 @@
 #include "ui_DateCell.h"
 
 #include <QDate>
+#include <Windows.h>
 
 #define CURRENTDAYSTYLE "QLabel{background-color: rgb(102,205,170);}"
 #define CURRENTMONTHSTYLE "QLabel{background-color: rgb(255,255,255);}"
@@ -14,6 +15,7 @@
 DateCell::DateCell(int iNO,QWidget *parent) :
     QWidget(parent),
     m_CellNO(iNO),
+    m_DetailWnd(NULL),
     m_IsCurrentDay(false),
     m_IsCurrentMonth(false),
     ui(new Ui::DateCell)
@@ -65,18 +67,40 @@ void DateCell::setCellStyle(bool bCurrentDay, bool bCurrentMonth)
 
 void DateCell::enterEvent(QEvent *event)
 {
-    if(!m_IsCurrentDay && m_IsCurrentMonth)
+    if(m_IsCurrentMonth)
     {
-        ui->dateLabel->setStyleSheet(MOUSEENTERSTYLE);
-        ui->taskLabel->setStyleSheet(MOUSEENTERSTYLE);
+        if(!m_IsCurrentDay)
+        {
+            ui->dateLabel->setStyleSheet(MOUSEENTERSTYLE);
+            ui->taskLabel->setStyleSheet(MOUSEENTERSTYLE);
+        }
+
+        if(m_DetailWnd == NULL)
+        {
+            QPoint pos;
+            pos = this->mapToGlobal(QPoint(0,0));
+            pos.setX(pos.x() + CELLWIDTH);
+            m_DetailWnd = new DetailWnd(pos);
+            m_DetailWnd->setFocusPolicy(Qt::NoFocus);
+            m_DetailWnd->show();
+        }
     }
 }
 
 void DateCell::leaveEvent(QEvent *event)
 {
-    if(!m_IsCurrentDay && m_IsCurrentMonth)
+    if(m_IsCurrentMonth)
     {
-        ui->dateLabel->setStyleSheet(CURRENTMONTHSTYLE);
-        ui->taskLabel->setStyleSheet(CURRENTMONTHSTYLE);
+        if(!m_IsCurrentDay)
+        {
+            ui->dateLabel->setStyleSheet(CURRENTMONTHSTYLE);
+            ui->taskLabel->setStyleSheet(CURRENTMONTHSTYLE);
+        }
+
+        if(m_DetailWnd != NULL)
+        {
+            m_DetailWnd->close();
+            m_DetailWnd = NULL;
+        }
     }
 }

@@ -2,6 +2,7 @@
 #define DATECELL_H
 
 #include <QWidget>
+#include "DetailWnd.h"
 
 namespace Ui {
 class DateCell;
@@ -20,9 +21,9 @@ public:
 private:
     void enterEvent(QEvent *event)Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event)Q_DECL_OVERRIDE;
-
 private:
     Ui::DateCell *ui;
+    DetailWnd *m_DetailWnd;
     int m_CellNO;
     bool m_IsCurrentDay;
     bool m_IsCurrentMonth;
