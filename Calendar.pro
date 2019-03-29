@@ -29,14 +29,20 @@ SOURCES += \
     DateCell.cpp \
     MyButton.cpp \
     MyLabel.cpp \
-    DetailWnd.cpp
+    DetailWnd.cpp \
+    StorageHandler.cpp \
+    MonthSummary.cpp \
+    DateCellDetail.cpp
 
 HEADERS += \
         CalendarWnd.h \
     DateCell.h \
     MyButton.h \
     MyLabel.h \
-    DetailWnd.h
+    DetailWnd.h \
+    StorageHandler.h \
+    MonthSummary.h \
+    DateCellDetail.h
 
 FORMS += \
         CalendarWnd.ui \

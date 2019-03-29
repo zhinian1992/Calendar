@@ -4,8 +4,8 @@
 #include "MyButton.h"
 
 #include <vector>
+#include <Windows.h>
 
-#include <QGraphicsDropShadowEffect>
 
 
 std::vector<DateCell *> m_CellList;
@@ -30,6 +30,8 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    shadow->setBlurRadius(12);
    //设置窗体阴影
    ui->widget->setGraphicsEffect(shadow);
+   //创建托盘图标
+   this->bindSystemTray();
    //创建日历格子
    for(int i = 0; i< 42;i++)
    {
@@ -41,7 +43,7 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
    m_CurrentDate = QDate::currentDate();
    this->updateCellText();
 
-   connect(ui->btn_Close,&MyButton::clicked,this,&QWidget::close);
+   connect(ui->btn_Close,&MyButton::clicked,this,&CalendarWnd::hide);
    connect(ui->label_NextMonth,&MyLabel::clicked,this,&CalendarWnd::goToNextMonth);
    connect(ui->label_NextYear,&MyLabel::clicked,this,&CalendarWnd::goToNextYear);
    connect(ui->label_LastMonth,&MyLabel::clicked,this,&CalendarWnd::goToLastMonth);
@@ -52,6 +54,33 @@ CalendarWnd::CalendarWnd(QWidget *parent) :
 CalendarWnd::~CalendarWnd()
 {
     delete ui;
+}
+
+void CalendarWnd::bindSystemTray()
+{
+    m_Tray = new QSystemTrayIcon();
+    m_Tray->setIcon(QIcon("resource/tray.ico"));
+    m_Tray->setToolTip(QStringLiteral("Calendar"));
+    connect(m_Tray,&QSystemTrayIcon::activated,this,&CalendarWnd::systemTrayClicked);
+
+    m_TrayMenu = new QMenu();
+    QAction *pClose = new QAction(QStringLiteral("close"),m_TrayMenu);
+    m_TrayMenu->addAction(pClose);
+    connect(pClose,&QAction::triggered,this,&CalendarWnd::close);
+
+    m_Tray->setContextMenu(m_TrayMenu);
+    m_Tray->show();
+}
+
+void CalendarWnd::systemTrayClicked(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::Trigger:
+        this->show();
+        break;
+    default:
+        break;
+    }
 }
 
 void CalendarWnd::updateCellText()
@@ -116,4 +145,20 @@ void CalendarWnd::backToToday()
 {
     m_CurrentDate = QDate::currentDate();
     updateCellText();
+}
+
+void CalendarWnd::closeEvent(QCloseEvent *event)
+{
+    m_Tray->hide();
+    event->accept();
+}
+
+bool CalendarWnd::nativeEvent(const QByteArray &eventType, void *message, long *result)
+{
+    MSG* msg = (MSG*)message;
+    switch (msg->message) {
+    default:
+        break;
+    }
+    return QWidget::nativeEvent(eventType,message,result);
 }

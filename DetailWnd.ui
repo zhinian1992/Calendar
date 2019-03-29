@@ -1,9 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>DetailWnd</class>
- <widget name="DetailWnd" class="QWidget">
+ <widget class="QWidget" name="DetailWnd">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,7 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>

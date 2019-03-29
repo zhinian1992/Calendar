@@ -11,13 +11,15 @@ DetailWnd::DetailWnd(QPoint pos,QWidget *parent) :
     ui->setupUi(this);
 
     //设置无边框
-    this->setWindowFlag(Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    this->setGeometry(pos.rx(),pos.ry(),200,200);
+    this->setAttribute(Qt::WA_StyledBackground,true);
 
-    this->setWindowOpacity(0.7);
+    this->setGeometry(pos.rx(),pos.ry(),DETAILWNDWIDTH,DETAILWNDHEIGHT);
+
+    this->setWindowOpacity(0.9);
 }
 
 DetailWnd::~DetailWnd()
